@@ -47,10 +47,13 @@
    docker-compose up --build
    
    这个命令将会：
+   
    构建FastAPI和Streamlit服务的Docker镜像。
+   
    启动两个服务，将FastAPI暴露在8000端口，Streamlit暴露在8501端口。
 
    要访问生成的服务的 FastAPI 文档，请使用 Web 浏览器访问 http://localhost:8000/docs
+   
    要访问UI，请访问 http://localhost:8501
 
    可以通过以下方式检查日志：
