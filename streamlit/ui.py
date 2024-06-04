@@ -44,7 +44,7 @@ seed = st.number_input("种子值", value=0)
 if st.button("合成语音"):
     if synthesize_speech(text, output_path, seed):
         st.session_state.synthesized = True
-        st.session_state.output_path = output_path
+        st.session_state.output_path = '../fastapi/' + output_path
 
 if st.session_state.synthesized:
     # 播放生成的音频文件
@@ -57,7 +57,7 @@ if st.session_state.synthesized:
         st.download_button(
             label="下载生成的语音文件",
             data=f,
-            file_name=st.session_state.output_path,
+            file_name=output_path,
             mime='audio/wav'
         )
 

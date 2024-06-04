@@ -8,27 +8,36 @@
 ## **二、本地安装使用**
 
 **环境依赖：**
- - cuda12.1   
- - pip install requirements.txt
+
+```bash
+cuda12.1   
+pip install requirements.txt
+```
 
 **程序运行方式：**
 
  - 启动FastAPI：用于 API 接口
-    
-    cd fastapi
- 
-    uvicorn server:app --host "0.0.0.0" --port 8000
+
+```bash
+cd fastapi
+uvicorn server:app --host "0.0.0.0" --port 8000
+```
+
  - 启动Streamlit：用于网页
- 
-    cd streamlit
- 
-    streamlit run ui.py
+
+```bash
+cd streamlit
+streamlit run ui.py
+```
+
  - 访问网页：http://localhost:8501   
  - 本地使用示例
       
-   curl -X POST -H 'content-type: application/json' -d\
-      '{"text":"朋友你好啊，今天天气怎么样 ？", "output_path": "abc.wav", "seed":232}' \
-            http://localhost:8000/tts
+```bash
+curl -X POST -H 'content-type: application/json' -d\
+   '{"text":"朋友你好啊，今天天气怎么样 ？", "output_path": "/audio/abc.wav", "seed":232}' \
+    http://localhost:8000/tts
+```
 
  - 参数说明：
   
@@ -40,7 +49,9 @@
     
  - 运行客户端
 
-    python client.py
+```bash
+python client.py
+```
 
 ## **三、Docker 部署**
 
