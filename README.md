@@ -44,7 +44,7 @@
 
 ## **三、Docker 部署**
 
-   docker-compose up --build
+      docker-compose up --build
    
    这个命令将会：
    
@@ -58,7 +58,7 @@
 
    可以通过以下方式检查日志：
 
-   docker-compose logs
+      docker-compose logs
 
 ## **四、 参考**
  - https://github.com/ultrasev/ChatTTS
