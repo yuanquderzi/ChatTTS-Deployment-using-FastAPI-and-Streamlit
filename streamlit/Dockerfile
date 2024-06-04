@@ -9,7 +9,7 @@ COPY ui.py /streamlit
 COPY requirements.txt /streamlit
 
 # 安装requirements.txt中指定的所有依赖包
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 
 # 暴露Streamlit的默认端口
 EXPOSE 8501
