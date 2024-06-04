@@ -1,5 +1,5 @@
 ## **一、项目简介**
-使用 FastAPI、Streamlit本地部署ChatTTS文本转语音模型
+使用 FastAPI 和 Streamlit 本地部署 ChatTTS 文本转语音模型，并通过 Docker Compose 进行容器化部署。
 
 **操作流程demo：**
 
@@ -30,7 +30,7 @@
       '{"text":"朋友你好啊，今天天气怎么样 ？", "output_path": "abc.wav", "seed":232}' \
             http://localhost:8000/tts
 
- - 说明：
+ - 参数说明：
   
       text：要合成的文本
 
@@ -53,6 +53,7 @@
    启动两个服务，将FastAPI暴露在8000端口，Streamlit暴露在8501端口。
 
    要访问生成的服务的 FastAPI 文档，请使用 Web 浏览器访问 http://localhost:8000/docs
+   
    
    要访问UI，请访问 http://localhost:8501
 
