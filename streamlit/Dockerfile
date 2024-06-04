@@ -15,4 +15,4 @@ RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua
 EXPOSE 8501
 
 # 运行Streamlit应用
-CMD ["streamlit", "run", "server.py"]
+CMD ["streamlit", "run", "ui.py"]
