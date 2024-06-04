@@ -35,7 +35,7 @@ streamlit run ui.py
       
 ```bash
 curl -X POST -H 'content-type: application/json' -d\
-   '{"text":"朋友你好啊，今天天气怎么样 ？", "output_path": "/audio/abc.wav", "seed":232}' \
+   '{"text":"朋友你好啊，今天天气怎么样 ？", "output_path": "abc.wav", "seed":232}' \
     http://localhost:8000/tts
 ```
 
