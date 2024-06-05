@@ -4,6 +4,9 @@ import numpy as np
 from fastapi import FastAPI, HTTPException, Depends
 import pydantic
 import ChatTTS
+#模型下载
+from modelscope import snapshot_download
+model_dir = snapshot_download('mirror013/ChatTTS')
 
 app = FastAPI()
 
@@ -16,7 +19,10 @@ class TTSInput(pydantic.BaseModel):
 
 def get_chat_model() -> ChatTTS.Chat:
     chat = ChatTTS.Chat()
-    chat.load_models()
+    chat.load_models(
+        source="local",
+        local_path=model_dir,
+    )
     return chat
 
 

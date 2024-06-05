@@ -1,8 +1,19 @@
 import streamlit as st
 import requests
 import json
+import re
+from cn2an import an2cn
 
-def synthesize_speech(text, output_path, seed, url="http://localhost:8000/tts"):
+def convert_arabic_to_chinese_in_string(s):
+    def replace_func(match):
+        number = match.group(0)
+        return an2cn(number)
+
+    # 匹配所有的阿拉伯数字
+    converted_str = re.sub(r'\d+', replace_func, s)
+    return converted_str
+
+def synthesize_speech(text, output_path, seed, url="http://localhost:8000/tts"):  # docker部署localhost改为fastapi
     payload = {
         "text": text,
         "output_path": output_path,
@@ -38,13 +49,14 @@ st.title("ChatTTS语音合成接口")
 st.write("输入文本、输出文件路径和种子值，生成语音文件。")
 
 text = st.text_area("输入文本")
+text = convert_arabic_to_chinese_in_string(text)
 output_path = st.text_input("输出文件路径", "output.wav")
 seed = st.number_input("种子值", value=0)
 
 if st.button("合成语音"):
     if synthesize_speech(text, output_path, seed):
         st.session_state.synthesized = True
-        st.session_state.output_path = '../fastapi/' + output_path
+        st.session_state.output_path = '/fastapi/' + output_path
 
 if st.session_state.synthesized:
     # 播放生成的音频文件
