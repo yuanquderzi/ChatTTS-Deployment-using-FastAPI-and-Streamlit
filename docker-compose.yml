@@ -22,6 +22,8 @@ services:
     networks:
       - deploy_network
     container_name: streamlit
+    environment:
+      - docker_env: true
 
 volumes:
   data-volume: # declare the volume
