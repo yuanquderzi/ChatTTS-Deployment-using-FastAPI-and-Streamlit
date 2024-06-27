@@ -3,6 +3,15 @@ import requests
 import json
 import re
 from cn2an import an2cn
+import os
+
+
+#通过env检测是否为docker环境
+try:
+    if os.environ['docker_env']==True:
+        hostname = 'fastapi'
+except KeyError:
+    hostname = "localhost"
 
 def convert_arabic_to_chinese_in_string(s):
     def replace_func(match):
@@ -13,7 +22,7 @@ def convert_arabic_to_chinese_in_string(s):
     converted_str = re.sub(r'\d+', replace_func, s)
     return converted_str
 
-def synthesize_speech(text, output_path, seed, url="http://localhost:8000/tts"):  # docker部署localhost改为fastapi
+def synthesize_speech(text, output_path, seed, url=f"http://{hostname}:8000/tts"): 
     payload = {
         "text": text,
         "output_path": output_path,
