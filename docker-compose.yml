@@ -2,9 +2,7 @@ version: '3'
 
 services:
   fastapi:
-    build: fastapi/
-    volumes:
-      - data-volume:/fastapi # mount the volume in the fastapi container
+    build: fastapi_pro/
     ports:
       - 8000:8000
     networks:
@@ -15,8 +13,6 @@ services:
     build: streamlit/
     depends_on:
       - fastapi
-    volumes:
-      - data-volume:/fastapi # mount the same volume in the streamlit container
     ports:
       - 8501:8501
     networks:
@@ -24,9 +20,6 @@ services:
     container_name: streamlit
     environment:
       - docker_env: true
-
-volumes:
-  data-volume: # declare the volume
 
 networks:
   deploy_network:
