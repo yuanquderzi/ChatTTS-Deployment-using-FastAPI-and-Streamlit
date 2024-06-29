@@ -44,7 +44,6 @@ def get_chat_model() -> ChatTTS.Chat:
 def tts(input: TTSInput, chat: ChatTTS.Chat = Depends(get_chat_model)):
     try:
         texts = [input.text]
-        print(input.speaker_id)
         if input.speaker_id == 0:
             r = chat.sample_random_speaker(seed=input.prompt.seed)
             params_infer_code = {
@@ -57,7 +56,6 @@ def tts(input: TTSInput, chat: ChatTTS.Chat = Depends(get_chat_model)):
         else:
             speak_tensor = select_voice_profile(str(input.speaker_id)).dict()["tensor"]
             speak_tensor = torch.tensor(speak_tensor)
-            print(speak_tensor)
             params_infer_code = {
                 'spk_emb': speak_tensor,  # add sampled speaker
                 'temperature': 0.0001,  # using customtemperature
