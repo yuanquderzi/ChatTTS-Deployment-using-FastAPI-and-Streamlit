@@ -9,7 +9,7 @@ COPY . /fastapi
 COPY requirements.txt /fastapi
 
 # 安装requirements.txt中指定的所有依赖包
-RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install --no-cache-dir -r requirements.txt
 
 # 暴露8000端口
 EXPOSE 8000

@@ -2,7 +2,7 @@ version: '3'
 
 services:
   fastapi:
-    build: fastapi_pro/
+    build: fastapi/
     ports:
       - 8000:8000
     networks:
