@@ -179,6 +179,7 @@ class Chat:
 
         text = [params_infer_code.get("prompt", "") + i for i in text]
         params_infer_code.pop("prompt", "")
+
         result = infer_code(
             self.pretrain_models, text, **params_infer_code, return_hidden=use_decoder
         )

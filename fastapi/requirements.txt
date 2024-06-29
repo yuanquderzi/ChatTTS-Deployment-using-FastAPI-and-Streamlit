@@ -10,3 +10,4 @@ uvicorn==0.30.0
 starlette==0.37.2
 pydantic==2.7.2
 modelscope==1.14.0
+numpy<2

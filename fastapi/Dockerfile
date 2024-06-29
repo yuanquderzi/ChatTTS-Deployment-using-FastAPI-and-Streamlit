@@ -1,6 +1,6 @@
 # 使用官方Python运行时作为基础镜像
 FROM python:3.9-slim
-
+RUN apt-get update && apt-get install -y libgomp1
 # 设置工作目录
 WORKDIR /fastapi
 
@@ -9,7 +9,7 @@ COPY . /fastapi
 COPY requirements.txt /fastapi
 
 # 安装requirements.txt中指定的所有依赖包
-RUN pip install --no-cache-dir -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
+RUN pip install --no-cache-dir -r requirements.txt
 
 # 暴露8000端口
 EXPOSE 8000
