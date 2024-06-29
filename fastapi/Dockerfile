@@ -1,6 +1,6 @@
 # 使用官方Python运行时作为基础镜像
 FROM python:3.9-slim
-
+RUN apt-get update && apt-get install -y libgomp1
 # 设置工作目录
 WORKDIR /fastapi
 
