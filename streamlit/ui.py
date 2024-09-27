@@ -3,6 +3,7 @@ import requests
 import json
 import re
 from cn2an import an2cn
+import os
 
 def convert_arabic_to_chinese_in_string(s):
     def replace_func(match):
@@ -13,7 +14,7 @@ def convert_arabic_to_chinese_in_string(s):
     converted_str = re.sub(r'\d+', replace_func, s)
     return converted_str
 
-def synthesize_speech(text, output_path, seed, url="http://localhost:8000/tts"):  # docker部署localhost改为fastapi
+def synthesize_speech(text, output_path, seed, url="http://fastapi:8001/tts"):  # 本地部署fastapi 改为localhost
     payload = {
         "text": text,
         "output_path": output_path,
@@ -56,20 +57,25 @@ seed = st.number_input("种子值", value=0)
 if st.button("合成语音"):
     if synthesize_speech(text, output_path, seed):
         st.session_state.synthesized = True
-        st.session_state.output_path = '/fastapi/' + output_path
+        st.session_state.output_path = os.path.join('/fastapi/', output_path)
 
 if st.session_state.synthesized:
-    # 播放生成的音频文件
-    audio_file = open(st.session_state.output_path, 'rb')
-    audio_bytes = audio_file.read()
-    st.audio(audio_bytes, format='audio/wav')
+    output_file_path = st.session_state.output_path
     
-    # 提供下载链接
-    with open(st.session_state.output_path, 'rb') as f:
-        st.download_button(
-            label="下载生成的语音文件",
-            data=f,
-            file_name=output_path,
-            mime='audio/wav'
-        )
+    # 检查文件是否存在
+    if os.path.exists(output_file_path):
+        audio_file = open(output_file_path, 'rb')
+        audio_bytes = audio_file.read()
+        st.audio(audio_bytes, format='audio/wav')
+
+        # 提供下载链接
+        with open(output_file_path, 'rb') as f:
+            st.download_button(
+                label="下载生成的语音文件",
+                data=f,
+                file_name=os.path.basename(output_file_path),
+                mime='audio/wav'
+            )
+    else:
+        st.error(f"文件不存在: {output_file_path}")
 

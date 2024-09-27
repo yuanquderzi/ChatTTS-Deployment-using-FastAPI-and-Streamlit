@@ -4,10 +4,12 @@ services:
   fastapi:
     build: fastapi/
     ports: 
-      - 8000:8000
+      - 8001:8001
     networks:
       - deploy_network
     container_name: fastapi
+    volumes:
+      - ./fastapi:/fastapi  # 将 fastapi 的目录映射到 本地 
 
   streamlit:
     build: streamlit/
@@ -18,6 +20,9 @@ services:
     networks:
       - deploy_network
     container_name: streamlit
+    volumes:
+      - ./streamlit:/streamlit  # 将 streamlit 的目录映射到 本地
+      - ./fastapi:/fastapi  # 将 fastapi 的目录映射到 streamlit 中
 
 networks:
   deploy_network:
